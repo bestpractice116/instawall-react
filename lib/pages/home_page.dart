@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flutter/services.dart';
+import '../components/bottom_navigation_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,41 +8,21 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        color: Colors.black,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-          child: GNav(
-            backgroundColor: Colors.black,
-            color: Colors.white,
-            activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade800,
-            gap: 8,
-            padding: const EdgeInsets.all(16),
-            onTabChange: (index) {
-              print(index);
-            },
-            tabs: const [
-              GButton(
-                icon: Icons.photo_library_outlined,
-                text: "Photos",
-              ),
-              GButton(
-                icon: Icons.search,
-                text: "Search",
-              ),
-              GButton(
-                icon: Icons.favorite_border,
-                text: "Likes",
-              ),
-              GButton(
-                icon: Icons.settings,
-                text: "Settings",
-              )
-            ],
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFe1e1e1),
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            "I N S T A W A L L",
+            style: TextStyle(color: Color(0xFF232323)),
           ),
+          leading: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.menu,
+                color: Color(0xFF232323),
+              )),
         ),
-      ),
-    );
+        bottomNavigationBar: const CustomBottomNavigationBar());
   }
 }
