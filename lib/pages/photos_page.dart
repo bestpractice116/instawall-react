@@ -8,8 +8,17 @@ class PhotosPage extends StatefulWidget {
 }
 
 class _PhotosPageState extends State<PhotosPage> {
-  int _current = 0;
-  List<String> categories = ["Nature", "1", "2", "3", "5", "5", "7"];
+  String _currentItem = "Architecture";
+
+  List<String> categories = [
+    "Architecture",
+    "Animals",
+    "Nature",
+    "Abstract",
+    "Backgrounds",
+    "Cityscapes"
+        "Photography"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +29,34 @@ class _PhotosPageState extends State<PhotosPage> {
       child: Column(
         children: [
           SizedBox(
-            height: 60,
-            width: double.infinity,
-            child: ListView.builder(
-                itemCount: categories.length,
+              height: 50,
+              width: double.infinity,
+              child: ListView(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _current = index;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(5),
-                      width: 80,
-                      height: 25,
-                      decoration: BoxDecoration(
-                          color: _current == index
-                              ? const Color(0xFFc7c7c7)
-                              : const Color(0xFFe1e1e1),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Center(child: Text(categories[index])),
-                    ),
-                  );
-                }),
-          ),
+                children: categories
+                    .map((e) => Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 8.0),
+                          child: OutlinedButton(
+                            onPressed: () {
+                              setState(() {
+                                _currentItem = e;
+                              });
+                            },
+                            style: OutlinedButton.styleFrom(
+                                backgroundColor: _currentItem == e
+                                    ? const Color(0xFFe1e1e1)
+                                    : Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24))),
+                            child: Text(
+                              e,
+                              style: const TextStyle(color: Color(0xFF232323)),
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              )),
         ],
       ),
     );
