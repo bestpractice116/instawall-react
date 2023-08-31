@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key});
+class CustomBottomNavigationBar extends StatefulWidget {
+  final void Function(int index) onItemTapped;
+  const CustomBottomNavigationBar({
+    super.key,
+    required this.onItemTapped,
+  });
 
+  @override
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,9 +27,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           tabBackgroundColor: const Color(0xFFf5f5f5),
           gap: 8,
           padding: const EdgeInsets.all(16),
-          onTabChange: (index) {
-            print(index);
-          },
+          onTabChange: widget.onItemTapped,
           tabs: const [
             GButton(
               icon: Icons.photo_library_outlined,
