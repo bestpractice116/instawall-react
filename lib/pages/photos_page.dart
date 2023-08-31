@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:insta_wall/services/api_service.dart';
+
+import '../models/photo.dart';
 
 class PhotosPage extends StatefulWidget {
   const PhotosPage({super.key});
@@ -17,9 +20,22 @@ class _PhotosPageState extends State<PhotosPage> {
     "Nature",
     "Abstract",
     "Backgrounds",
-    "Cityscapes"
-        "Photography"
+    "Cityscapes",
+    "Photography"
   ];
+
+  late List<Photo>? photos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
+
+  void _getdata() async {
+    photos = (await ApiService().getPhotos(_currentItem))!;
+    // Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +75,16 @@ class _PhotosPageState extends State<PhotosPage> {
                     .toList(),
               )),
           Expanded(
-            child: MasonryGridView.builder(
-                itemCount: 4,
-                gridDelegate:
-                    const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3),
-                itemBuilder: ((context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset('lib/images/imd.jpg'))))),
-          )
+              child: MasonryGridView.builder(
+            itemCount: photos!.length,
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3),
+            itemBuilder: ((context, index) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(photos![index].urls.regular)))),
+          ))
         ],
       ),
     );
