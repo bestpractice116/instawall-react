@@ -9,7 +9,8 @@ class SearchTextField extends StatelessWidget {
       {super.key,
       required this.controller,
       required this.hint,
-      required this.onSubmitted, this.icon});
+      required this.onSubmitted,
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +18,21 @@ class SearchTextField extends StatelessWidget {
       controller: controller,
       onSubmitted: onSubmitted,
       decoration: InputDecoration(
-          prefixIcon: icon,
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: Color.fromARGB(255, 209, 209, 209))),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: Color.fromARGB(255, 181, 181, 181))),
-          fillColor: Colors.grey[200],
-          filled: true,
-          hintText: hint,
-          hintStyle: const TextStyle(color: Color(0xFF232323))),
+        prefixIcon: icon,
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+                const BorderSide(color: Color.fromARGB(255, 209, 209, 209))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+                const BorderSide(color: Color.fromARGB(255, 181, 181, 181))),
+        fillColor: Colors.grey[200],
+        filled: true,
+        hintText: hint,
+        hintStyle: const TextStyle(color: Color(0xFF232323)),
+        contentPadding: const EdgeInsets.symmetric(vertical: 5), // <-- SEE HERE
+      ),
     );
   }
 }

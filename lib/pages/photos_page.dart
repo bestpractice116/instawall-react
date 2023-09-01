@@ -53,7 +53,10 @@ class _PhotosPageState extends State<PhotosPage> {
             child: SearchTextField(
               controller: searchController,
               hint: 'Search',
-              icon: const Icon(Icons.search),
+              icon: const Icon(
+                Icons.search,
+                color: Color(0xFFbcbcbc),
+              ),
               onSubmitted: (val) {
                 setState(() {
                   _currentItem = val;
