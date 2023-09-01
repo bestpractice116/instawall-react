@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:insta_wall/components/search_text_field.dart';
 import 'package:insta_wall/services/api_service.dart';
 
+import '../components/grid_view.dart';
 import '../models/photo.dart';
 
 class PhotosPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _PhotosPageState extends State<PhotosPage> {
     "Photography"
   ];
 
-  late List<Photo>? photos = [];
+  late List<Photo>? listPhoto = [];
 
   @override
   void initState() {
@@ -33,9 +34,11 @@ class _PhotosPageState extends State<PhotosPage> {
   }
 
   void _getdata() async {
-    photos = (await ApiService().getPhotos(_currentItem))!;
-    // Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+    listPhoto = (await ApiService().getPhotos(_currentItem))!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
+
+  final searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +48,20 @@ class _PhotosPageState extends State<PhotosPage> {
       height: double.infinity,
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 8.0),
+            child: SearchTextField(
+              controller: searchController,
+              hint: 'Search',
+              icon: const Icon(Icons.search),
+              onSubmitted: (val) {
+                setState(() {
+                  _currentItem = val;
+                });
+                _getdata();
+              },
+            ),
+          ),
           SizedBox(
               height: 50,
               width: double.infinity,
@@ -59,6 +76,7 @@ class _PhotosPageState extends State<PhotosPage> {
                               setState(() {
                                 _currentItem = e;
                               });
+                              _getdata();
                             },
                             style: OutlinedButton.styleFrom(
                                 backgroundColor: _currentItem == e
@@ -74,17 +92,9 @@ class _PhotosPageState extends State<PhotosPage> {
                         ))
                     .toList(),
               )),
-          Expanded(
-              child: MasonryGridView.builder(
-            itemCount: photos!.length,
-            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3),
-            itemBuilder: ((context, index) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(photos![index].urls.regular)))),
-          ))
+          CustomGridView(
+            photos: listPhoto,
+          )
         ],
       ),
     );

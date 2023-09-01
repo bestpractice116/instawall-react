@@ -34,10 +34,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               text: "Photos",
             ),
             GButton(
-              icon: Icons.search,
-              text: "Search",
-            ),
-            GButton(
               icon: Icons.favorite_border,
               text: "Likes",
             ),

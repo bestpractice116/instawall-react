@@ -8,7 +8,7 @@ class Photo {
   Urls urls;
   DownloadLinks downloadLinks;
   int likes;
-  // User user;
+  User user;
 
   Photo({
     required this.id,
@@ -17,7 +17,7 @@ class Photo {
     required this.urls,
     required this.downloadLinks,
     required this.likes,
-    // required this.user,
+    required this.user,
   });
 
   factory Photo.fromMap(Map<String, dynamic> json) => Photo(
@@ -27,7 +27,7 @@ class Photo {
         urls: Urls.fromMap(json["urls"]),
         downloadLinks: DownloadLinks.fromMap(json["links"]),
         likes: json["likes"],
-        // user: User.fromMap(json["user"]),
+        user: User.fromMap(json["user"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -37,6 +37,6 @@ class Photo {
         "urls": urls.toMap(),
         "downloadLinks": downloadLinks.toMap(),
         "likes": likes,
-        // "user": user.toMap(),
+        "user": user.toMap(),
       };
 }

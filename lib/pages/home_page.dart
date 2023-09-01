@@ -14,9 +14,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     const PhotosPage(),
-    const PhotosPage(),
-    const PhotosPage(),
-    const PhotosPage(),
+    const Text("Test1"),
+    const Text("Test2"),
+    const Text("Test3"),
   ];
 
   void _onItemTapped(int index) {

@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:insta_wall/services/api_constants.dart';
 import '../models/main.dart';
 import '../models/photo.dart';
+import 'dart:developer' as developer;
 
 class ApiService {
   Future<List<Photo>?> getPhotos(String category) async {
@@ -12,12 +13,10 @@ class ApiService {
       if (response.statusCode == 200) {
         Main main = resultFromMap(response.body);
         List<Photo> photos = main.results;
-        // print(photos[0].urls.regular);
-
         return photos;
       }
     } catch (e) {
-      print("Error fetching photos: $e");
+      developer.log('Error fetching photos: $e', name: "ApiService");
     }
 
     return null;

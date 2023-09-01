@@ -25,15 +25,15 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> json) => User(
         id: json["id"],
-        username: json["username"],
-        name: json["name"],
-        bio: json["bio"],
-        location: json["location"],
+        username: json["username"] ?? "",
+        name: json["name"] ?? "",
+        bio: json["bio"] ?? "",
+        location: json["location"] ?? "",
         links: UserLinks.fromMap(json["links"]),
         profileImage: ProfileImage.fromMap(json["profile_image"]),
-        totalCollections: json["total_collections"],
-        totalLikes: json["total_likes"],
-        totalPhotos: json["total_photos"],
+        totalCollections: json["total_collections"] ?? 0,
+        totalLikes: json["total_likes"] ?? 0,
+        totalPhotos: json["total_photos"] ?? 0,
       );
 
   Map<String, dynamic> toMap() => {
@@ -60,8 +60,8 @@ class UserLinks {
   });
 
   factory UserLinks.fromMap(Map<String, dynamic> json) => UserLinks(
-        following: json["following"],
-        followers: json["followers"],
+        following: json["following"] ?? "",
+        followers: json["followers"] ?? "",
       );
 
   Map<String, dynamic> toMap() => {
@@ -82,9 +82,9 @@ class ProfileImage {
   });
 
   factory ProfileImage.fromMap(Map<String, dynamic> json) => ProfileImage(
-        small: json["small"],
-        medium: json["medium"],
-        large: json["large"],
+        small: json["small"] ?? "",
+        medium: json["medium"] ?? "",
+        large: json["large"] ?? "",
       );
 
   Map<String, dynamic> toMap() => {
