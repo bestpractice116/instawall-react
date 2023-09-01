@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta_wall/components/search_text_field.dart';
 import 'package:insta_wall/services/api_service.dart';
-
 import '../components/grid_view.dart';
 import '../models/photo.dart';
 

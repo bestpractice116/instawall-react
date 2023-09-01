@@ -16,6 +16,9 @@ class InstaWall extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
         initialRoute: Constants.initialRoute,
         onGenerateRoute: (settings) {
           switch (settings.name) {

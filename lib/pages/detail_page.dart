@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../components/row_user_data.dart';
 import '../models/photo.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -11,45 +12,52 @@ class DetailsPage extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: const Color(0xFFf5f5f5),
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Color(0xFFe1e1e1),
+            statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark,
             statusBarBrightness: Brightness.light,
           ),
-          backgroundColor: const Color(0xFFe1e1e1),
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            "D E T A I L",
-            style: TextStyle(color: Color(0xFF232323)),
-          ),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_rounded,
-                color: Color(0xFF232323),
-              )),
-        ),
-        body: Container(
-          margin: const EdgeInsets.all(5),
-          width: double.infinity,
-          height: double.infinity,
-          child: Column(children: [
-            Column(children: [
-              AspectRatio(
-                aspectRatio: 1,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Image(
-                    image: NetworkImage(args.urls.regular),
-                  ),
+          leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Ink(
+                decoration: const ShapeDecoration(
+                  color: Color(0xFFf5f5f5),
+                  shape: CircleBorder(),
                 ),
-              )
-            ])
-          ]),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios_rounded,
+                      color: Color(0xFF232323),
+                    )),
+              )),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  args.urls.full,
+                  width: double.infinity,
+                  height: 450,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: RowUserData(
+                  photo: args,
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }

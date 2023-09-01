@@ -23,7 +23,7 @@ class CustomGridView extends StatelessWidget {
             },
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(photos![index].urls.regular)),
+                child: Image.network(photos![index].urls.full)),
           ))),
     ));
   }
