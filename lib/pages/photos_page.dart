@@ -95,9 +95,7 @@ class _PhotosPageState extends State<PhotosPage> {
                         ))
                     .toList(),
               )),
-          CustomGridView(
-            photos: listPhoto,
-          )
+          CustomGridView(photos: listPhoto)
         ],
       ),
     );
