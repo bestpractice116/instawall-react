@@ -19,7 +19,7 @@ class CustomGridView extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, Constants.detailRoute,
-                  arguments: photos);
+                  arguments: photos![index]);
             },
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
