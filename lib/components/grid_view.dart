@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../models/photo.dart';
-import '../pages/detail_page.dart';
+import '../services/constants.dart';
 
 class CustomGridView extends StatelessWidget {
   final List<Photo>? photos;
@@ -18,12 +18,8 @@ class CustomGridView extends StatelessWidget {
           padding: const EdgeInsets.all(2.0),
           child: GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DetailsPage(
-                            photo: photos![index],
-                          )));
+              Navigator.pushNamed(context, Constants.detailRoute,
+                  arguments: photos);
             },
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),

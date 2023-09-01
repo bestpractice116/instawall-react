@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:insta_wall/models/photo.dart';
+import '../models/photo.dart';
 
 class DetailsPage extends StatelessWidget {
-  final Photo photo;
-  const DetailsPage({super.key, required this.photo});
+  const DetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as Photo;
+
     return Scaffold(
         backgroundColor: const Color(0xFFf5f5f5),
         appBar: AppBar(
@@ -43,7 +44,7 @@ class DetailsPage extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: Image(
-                    image: NetworkImage(photo.urls.regular),
+                    image: NetworkImage(args.urls.regular),
                   ),
                 ),
               )
