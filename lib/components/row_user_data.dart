@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
+import 'package:share_plus/share_plus.dart';
 import '../models/photo.dart';
 
 class RowUserData extends StatelessWidget {
   final Photo photo;
   const RowUserData({super.key, required this.photo});
+
+  void share(String url) {
+    Share.share(url, subject: 'Nice picture');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +47,14 @@ class RowUserData extends StatelessWidget {
         ),
         Row(
           children: [
-            const Icon(
-              Icons.share_outlined,
-              color: Color.fromARGB(255, 97, 97, 97),
+            IconButton(
+              icon: const Icon(
+                Icons.share_outlined,
+                color: Color.fromARGB(255, 97, 97, 97),
+              ),
+              onPressed: () {
+                share(photo.downloadLinks.download.toString());
+              },
             ),
             const SizedBox(width: 15),
             IconButton(
@@ -54,9 +65,10 @@ class RowUserData extends StatelessWidget {
               onPressed: () {},
             ),
             const SizedBox(width: 15),
-            const Icon(
-              Icons.favorite_border,
-              color: Color.fromARGB(255, 97, 97, 97),
+            LikeButton(
+              size: 20,
+              likeCount: photo.likes,
+              countPostion: CountPostion.bottom,
             ),
           ],
         )
