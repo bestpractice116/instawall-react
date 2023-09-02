@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../models/main.dart';
 import '../../models/photo.dart';
 import 'dart:developer' as developer;
 import 'constants.dart';
 
-class ApiService {
+class ApiService extends ChangeNotifier {
   Future<List<Photo>?> getPhotos(String category) async {
     try {
       var url = Uri.parse(
