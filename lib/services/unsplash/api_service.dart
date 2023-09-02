@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
-import 'package:insta_wall/services/constants.dart';
-import '../models/main.dart';
-import '../models/photo.dart';
+import '../../models/main.dart';
+import '../../models/photo.dart';
 import 'dart:developer' as developer;
+import 'constants.dart';
 
 class ApiService {
   Future<List<Photo>?> getPhotos(String category) async {

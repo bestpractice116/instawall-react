@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "980573870044",
+    "project_id": "instawall-1cabb",
+    "storage_bucket": "instawall-1cabb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980573870044:android:171577b92782791275a119",
+        "android_client_info": {
+          "package_name": "com.example.insta_wall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980573870044-98go0cdl2hfqu4nn8mertqr3jjeo3pek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR-u_giXuTApJzbueyrtcwFFpJf4jVKEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980573870044-98go0cdl2hfqu4nn8mertqr3jjeo3pek.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "980573870044-9v2duq5d0rq0h63r1a2qlhmqbavivueu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.instaWall"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

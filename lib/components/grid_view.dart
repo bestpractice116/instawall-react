@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../models/photo.dart';
-import '../services/constants.dart';
+import '../services/unsplash/constants.dart';
 
 class CustomGridView extends StatelessWidget {
   final List<Photo>? photos;

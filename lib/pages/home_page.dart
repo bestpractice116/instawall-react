@@ -28,38 +28,40 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color(0xFFf5f5f5),
-        appBar: AppBar(
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Color(0xFFe1e1e1),
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.light,
-            ),
-            backgroundColor: const Color(0xFFe1e1e1),
-            elevation: 0,
-            centerTitle: true,
-            title: const Text(
-              "I N S T A W A L L",
-              style: TextStyle(color: Color(0xFF232323)),
-            ),
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Ink(
-                decoration: const ShapeDecoration(
-                  color: Color(0xFFf5f5f5),
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.menu,
-                      color: Color(0xFF232323),
-                    )),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: const Color(0xFFf5f5f5),
+          appBar: AppBar(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: Color(0xFFe1e1e1),
+                statusBarIconBrightness: Brightness.dark,
+                statusBarBrightness: Brightness.light,
               ),
-            )),
-        body: _widgetOptions.elementAt(_selectedIndex),
-        bottomNavigationBar:
-            CustomBottomNavigationBar(onItemTapped: _onItemTapped));
+              backgroundColor: const Color(0xFFe1e1e1),
+              elevation: 0,
+              centerTitle: true,
+              title: const Text(
+                "I N S T A W A L L",
+                style: TextStyle(color: Color(0xFF232323)),
+              ),
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Ink(
+                  decoration: const ShapeDecoration(
+                    color: Color(0xFFf5f5f5),
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.menu,
+                        color: Color(0xFF232323),
+                      )),
+                ),
+              )),
+          body: _widgetOptions.elementAt(_selectedIndex),
+          bottomNavigationBar:
+              CustomBottomNavigationBar(onItemTapped: _onItemTapped)),
+    );
   }
 }

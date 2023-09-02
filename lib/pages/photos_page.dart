@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:insta_wall/components/search_text_field.dart';
-import 'package:insta_wall/services/api_service.dart';
 import '../components/grid_view.dart';
 import '../models/photo.dart';
+import '../services/unsplash/api_service.dart';
 
 class PhotosPage extends StatefulWidget {
   const PhotosPage({super.key});
@@ -19,8 +19,8 @@ class _PhotosPageState extends State<PhotosPage> {
     "Animals",
     "Nature",
     "Abstract",
-    "Backgrounds",
-    "Cityscapes",
+    "Background",
+    "Cityscape",
     "Photography"
   ];
 
