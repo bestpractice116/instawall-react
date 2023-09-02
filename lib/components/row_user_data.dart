@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
-import 'package:share_plus/share_plus.dart';
 import '../models/photo.dart';
 
-class RowUserData extends StatelessWidget {
+class RowUserData extends StatefulWidget {
   final Photo photo;
   const RowUserData({super.key, required this.photo});
+  @override
+  State<RowUserData> createState() => _RowUserDataState();
+}
 
-  void share(String url) {
-    Share.share(url, subject: 'Nice picture');
-  }
-
+class _RowUserDataState extends State<RowUserData> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +18,8 @@ class RowUserData extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(photo.user.profileImage.medium),
+              backgroundImage:
+                  NetworkImage(widget.photo.user.profileImage.medium),
               radius: 25,
             ),
             const SizedBox(width: 10),
@@ -27,7 +27,7 @@ class RowUserData extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  photo.user.name,
+                  widget.photo.user.name,
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class RowUserData extends StatelessWidget {
                   height: 3,
                 ),
                 Text(
-                  "${photo.user.totalPhotos} photos",
+                  "${widget.photo.user.totalPhotos} photos",
                   style: const TextStyle(
                       fontSize: 12, color: Color.fromARGB(255, 97, 97, 97)),
                 )
@@ -52,9 +52,7 @@ class RowUserData extends StatelessWidget {
                 Icons.share_outlined,
                 color: Color.fromARGB(255, 97, 97, 97),
               ),
-              onPressed: () {
-                share(photo.downloadLinks.download.toString());
-              },
+              onPressed: () {},
             ),
             const SizedBox(width: 15),
             IconButton(
@@ -67,7 +65,7 @@ class RowUserData extends StatelessWidget {
             const SizedBox(width: 15),
             LikeButton(
               size: 20,
-              likeCount: photo.likes,
+              likeCount: widget.photo.likes,
               countPostion: CountPostion.bottom,
             ),
           ],
