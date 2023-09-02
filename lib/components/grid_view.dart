@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../models/photo.dart';
 import '../services/unsplash/constants.dart';
@@ -9,6 +10,12 @@ class CustomGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (photos!.isEmpty) {
+      return const SpinKitRotatingCircle(
+        color: Color(0xFFe1e1e1),
+        size: 70,
+      );
+    }
     return Expanded(
         child: MasonryGridView.builder(
       itemCount: photos!.length,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta_wall/components/search_text_field.dart';
+import 'package:provider/provider.dart';
 import '../components/grid_view.dart';
 import '../models/photo.dart';
 import '../services/unsplash/api_service.dart';
@@ -33,8 +34,13 @@ class _PhotosPageState extends State<PhotosPage> {
   }
 
   void _getdata() async {
-    listPhoto = (await ApiService().getPhotos(_currentItem))!;
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+    final apiService = Provider.of<ApiService>(context, listen: false);
+    listPhoto = (await apiService.getPhotos(_currentItem))!;
+    // Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+
+  Future<void> _refresh() async {
+    _getdata();
   }
 
   final searchController = TextEditingController();
@@ -67,32 +73,36 @@ class _PhotosPageState extends State<PhotosPage> {
           SizedBox(
               height: 50,
               width: double.infinity,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: categories
-                    .map((e) => Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 8.0),
-                          child: OutlinedButton(
-                            onPressed: () {
-                              setState(() {
-                                _currentItem = e;
-                              });
-                              _getdata();
-                            },
-                            style: OutlinedButton.styleFrom(
-                                backgroundColor: _currentItem == e
-                                    ? const Color(0xFFe1e1e1)
-                                    : Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24))),
-                            child: Text(
-                              e,
-                              style: const TextStyle(color: Color(0xFF232323)),
+              child: RefreshIndicator(
+                onRefresh: _refresh,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: categories
+                      .map((e) => Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 8.0),
+                            child: OutlinedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _currentItem = e;
+                                });
+                                _getdata();
+                              },
+                              style: OutlinedButton.styleFrom(
+                                  backgroundColor: _currentItem == e
+                                      ? const Color(0xFFe1e1e1)
+                                      : Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24))),
+                              child: Text(
+                                e,
+                                style:
+                                    const TextStyle(color: Color(0xFF232323)),
+                              ),
                             ),
-                          ),
-                        ))
-                    .toList(),
+                          ))
+                      .toList(),
+                ),
               )),
           CustomGridView(photos: listPhoto)
         ],
