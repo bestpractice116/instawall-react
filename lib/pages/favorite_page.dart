@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../models/photo.dart';
+import '../services/constants.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -37,18 +38,28 @@ class _FavoritePageState extends State<FavoritePage> {
             itemCount: listPhoto.length,
             itemBuilder: (context, index) {
               return Stack(children: [
-                Image.network(
-                  listPhoto[index].urls.full,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Constants.detailRoute,
+                        arguments: listPhoto[index]);
+                  },
+                  child: Image.network(
+                    listPhoto[index].urls.full,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                Text(
-                  "Photo by ${listPhoto[index].user.name} on Unsplash",
-                  style: const TextStyle(
-                      color: Color(0xFFf5f5f5),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                )
+                Positioned.fill(
+                    child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    listPhoto[index].user.name,
+                    style: const TextStyle(
+                        color: Color(0xFFf5f5f5),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ))
               ]);
             }),
       ),

@@ -32,19 +32,20 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           backgroundColor: const Color(0xFFf5f5f5),
           appBar: AppBar(
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Color(0xFFe1e1e1),
-                statusBarIconBrightness: Brightness.dark,
-                statusBarBrightness: Brightness.light,
-              ),
-              backgroundColor: const Color(0xFFe1e1e1),
-              elevation: 0,
-              centerTitle: true,
-              title: const Text(
-                "I N S T A W A L L",
-                style: TextStyle(color: Color(0xFF232323)),
-              ),
-              leading: Padding(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Color(0xFFe1e1e1),
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+            ),
+            backgroundColor: const Color(0xFFe1e1e1),
+            elevation: 0,
+            centerTitle: true,
+            title: const Text(
+              "I N S T A W A L L",
+              style: TextStyle(color: Color(0xFF232323)),
+            ),
+            leading: Builder(builder: (context) {
+              return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Ink(
                   decoration: const ShapeDecoration(
@@ -52,13 +53,76 @@ class _HomePageState extends State<HomePage> {
                     shape: CircleBorder(),
                   ),
                   child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.menu,
-                        color: Color(0xFF232323),
-                      )),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Color(0xFF232323),
+                    ),
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  ),
                 ),
-              )),
+              );
+            }),
+          ),
+          drawer: Drawer(
+            backgroundColor: const Color(0xFFe1e1e1),
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  child: Center(
+                    child: Text(
+                      "InstaWall",
+                      style: TextStyle(fontSize: 35),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.home,
+                    color: Color(0xFF232323),
+                  ),
+                  title: const Text(
+                    'Photos',
+                    style: TextStyle(color: Color(0xFF232323)),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.train,
+                    color: Color(0xFF232323),
+                  ),
+                  title: const Text('Favorite',
+                      style: TextStyle(color: Color(0xFF232323))),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const AboutListTile(
+                  icon: Icon(
+                    Icons.info,
+                    color: Color(0xFF232323),
+                  ),
+                  applicationIcon: Icon(
+                    Icons.photo_camera_back,
+                    color: Color(0xFF232323),
+                  ),
+                  applicationName: 'InstaWall',
+                  applicationVersion: '1.0',
+                  applicationLegalese: '© 2023 Company',
+                  aboutBoxChildren: [],
+                  child:
+                      Text('About', style: TextStyle(color: Color(0xFF232323))),
+                ),
+              ],
+            ),
+          ),
           body: _widgetOptions.elementAt(_selectedIndex),
           bottomNavigationBar:
               CustomBottomNavigationBar(onItemTapped: _onItemTapped)),
