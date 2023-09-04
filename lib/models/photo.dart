@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 
+import 'download_links.dart';
 import 'url.dart';
 import 'user.dart';
 part 'photo.g.dart';

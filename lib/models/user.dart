@@ -1,13 +1,38 @@
+import 'package:hive/hive.dart';
+import 'profile_image.dart';
+import 'user_links.dart';
+part 'user.g.dart';
+
+@HiveType(typeId: 3)
 class User {
+  @HiveField(0)
   String id;
+
+  @HiveField(1)
   String username;
+
+  @HiveField(2)
   String name;
+
+  @HiveField(3)
   String bio;
+
+  @HiveField(4)
   String location;
+
+  @HiveField(5)
   UserLinks links;
+
+  @HiveField(6)
   ProfileImage profileImage;
+
+  @HiveField(7)
   int totalCollections;
+
+  @HiveField(8)
   int totalLikes;
+
+  @HiveField(9)
   int totalPhotos;
 
   User({
@@ -47,49 +72,5 @@ class User {
         "total_collections": totalCollections,
         "total_likes": totalLikes,
         "total_photos": totalPhotos,
-      };
-}
-
-class UserLinks {
-  String following;
-  String followers;
-
-  UserLinks({
-    required this.following,
-    required this.followers,
-  });
-
-  factory UserLinks.fromMap(Map<String, dynamic> json) => UserLinks(
-        following: json["following"] ?? "",
-        followers: json["followers"] ?? "",
-      );
-
-  Map<String, dynamic> toMap() => {
-        "following": following,
-        "followers": followers,
-      };
-}
-
-class ProfileImage {
-  String small;
-  String medium;
-  String large;
-
-  ProfileImage({
-    required this.small,
-    required this.medium,
-    required this.large,
-  });
-
-  factory ProfileImage.fromMap(Map<String, dynamic> json) => ProfileImage(
-        small: json["small"] ?? "",
-        medium: json["medium"] ?? "",
-        large: json["large"] ?? "",
-      );
-
-  Map<String, dynamic> toMap() => {
-        "small": small,
-        "medium": medium,
-        "large": large,
       };
 }

@@ -1,7 +1,18 @@
+import 'package:hive/hive.dart';
+
+part 'url.g.dart';
+
+@HiveType(typeId: 1)
 class Urls {
+  @HiveField(0)
   String full;
+
+  @HiveField(1)
   String regular;
+  
+  @HiveField(2)
   String small;
+
 
   Urls({
     required this.full,
@@ -22,22 +33,3 @@ class Urls {
       };
 }
 
-class DownloadLinks {
-  String download;
-  String downloadLocation;
-
-  DownloadLinks({
-    required this.download,
-    required this.downloadLocation,
-  });
-
-  factory DownloadLinks.fromMap(Map<String, dynamic> json) => DownloadLinks(
-        download: json["download"],
-        downloadLocation: json["download_location"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "download": download,
-        "download_location": downloadLocation,
-      };
-}
