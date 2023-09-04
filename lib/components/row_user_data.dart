@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:like_button/like_button.dart';
 import '../models/photo.dart';
 
@@ -10,6 +11,22 @@ class RowUserData extends StatefulWidget {
 }
 
 class _RowUserDataState extends State<RowUserData> {
+  final _photoBox = Hive.box("photo_box");
+
+  Future<bool> _like(Photo photo) async {
+    if (_photoBox.get(photo.id) == null) {
+      _photoBox.put(photo.id, photo);
+      return true;
+    }
+
+    _photoBox.delete(photo.id);
+    return false;
+  }
+
+  bool _isLiked(String id) {
+    return _photoBox.get(id) != null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -67,6 +84,8 @@ class _RowUserDataState extends State<RowUserData> {
               size: 20,
               likeCount: widget.photo.likes,
               countPostion: CountPostion.bottom,
+              isLiked: _isLiked(widget.photo.id),
+              onTap: (isLiked) => _like(widget.photo),
             ),
           ],
         )

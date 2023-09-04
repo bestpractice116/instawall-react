@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:insta_wall/components/search_text_field.dart';
-import 'package:provider/provider.dart';
-import '../components/grid_view.dart';
 import '../models/photo.dart';
-import '../services/unsplash/api_service.dart';
+import '../services/api_service.dart';
+import '../services/constants.dart';
 
 class PhotosPage extends StatefulWidget {
   const PhotosPage({super.key});
@@ -27,20 +27,8 @@ class _PhotosPageState extends State<PhotosPage> {
 
   late List<Photo>? listPhoto = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _getdata();
-  }
-
-  void _getdata() async {
-    final apiService = Provider.of<ApiService>(context, listen: false);
-    listPhoto = (await apiService.getPhotos(_currentItem))!;
-    // Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-  }
-
-  Future<void> _refresh() async {
-    _getdata();
+  Future<void> _getdata() async {
+    listPhoto = (await ApiService().getPhotos(_currentItem))!;
   }
 
   final searchController = TextEditingController();
@@ -74,7 +62,7 @@ class _PhotosPageState extends State<PhotosPage> {
               height: 50,
               width: double.infinity,
               child: RefreshIndicator(
-                onRefresh: _refresh,
+                onRefresh: _getdata,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: categories
@@ -104,7 +92,37 @@ class _PhotosPageState extends State<PhotosPage> {
                       .toList(),
                 ),
               )),
-          CustomGridView(photos: listPhoto)
+          Expanded(
+              child: FutureBuilder(
+            future: _getdata(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xFFe1e1e1),
+                  ),
+                );
+              } else {
+                return MasonryGridView.builder(
+                  itemCount: listPhoto!.length,
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                  itemBuilder: ((context, index) => Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, Constants.detailRoute,
+                              arguments: listPhoto![index]);
+                        },
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(listPhoto![index].urls.full)),
+                      ))),
+                );
+              }
+            },
+          ))
         ],
       ),
     );
