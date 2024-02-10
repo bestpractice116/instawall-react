@@ -29,7 +29,3 @@ GIF created with `LiceCap`.
 4. Run the app: 
     ```bash
     flutter run
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
-MIT License
